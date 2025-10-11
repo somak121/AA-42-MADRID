@@ -1,43 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/10 19:40:00 by smikhail          #+#    #+#             */
-/*   Updated: 2025/10/11 18:03:35 by smikhail         ###   ########.fr       */
+/*   Created: 2025/10/11 18:02:55 by smikhail          #+#    #+#             */
+/*   Updated: 2025/10/11 18:33:07 by smikhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//  strjoin - concatenate two strings into a new string 
+// itoa - string representing the integer number recived as an argument
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_itoa(int n)
 {
 	char	*str;
-	int		i;
-	int		j;
+	size_t	len;
+	size_t	i;
 
-	if (!s1 || !s2)
-		return (NULL);
-	str = (char *)malloc((ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1)
-			* sizeof(char));
+	i = 0;
+	if (n == 0)
+		str[0] = '0';
+	len = ft_strlen((char *)n);
+	str = (char *)malloc((len + 1) * sizeof(char));
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (s1[i] != '\0')
+	if (n < 0)
 	{
-		str[i] = s1[i];
-		i++;
+		str[i] = '-';
+		n = -n;
 	}
-	j = 0;
-	while (s2[j] != '\0')
+	while (n > 0)
 	{
-		str[i + j] = s2[j];
-		j++;
+		str[--len] = (n % 10) + '0';
+		n /= 10;
 	}
-	str[i + j] = '\0';
+	str[len] = '\0';
 	return (str);
 }
