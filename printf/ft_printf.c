@@ -1,10 +1,39 @@
-#include "printf.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/02 15:25:51 by smikhail          #+#    #+#             */
+/*   Updated: 2025/11/02 18:13:15 by smikhail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "ft_printf.h"
 
-int	ft_print_percent(void)
+int	ft_print_format(char spec, va_list args)
 {
-	write(1, "%", 1);
-	return (1);
+	if (spec == 'c')
+		return (ft_printf_char(va_arg(args, int)));
+	else if (spec == 's')
+		return (ft_print_str(va_arg(args, char *)));
+	else if (spec == 'p')
+		return (ft_print_ptr(va_arg(args, void *)));
+	else if (spec == 'd' || spec == 'i')
+		return (ft_print_int(va_arg(args, int)));
+	else if (spec == 'u')
+		return (ft_printf_int_unsigned(va_arg(args, unsigned int)));
+	else if (spec == 'x')
+		return (ft_print_hex(va_arg(args, unsigned int), 0));
+	else if (spec == 'X')
+		return (ft_print_hex(va_arg(args, unsigned int), 1));
+	else if (spec == '%')
+	{
+		write(1, "%", 1);
+		return (1);
+	}
+	return (0);
 }
 
 int	ft_printf(const char *format, ...)
@@ -32,29 +61,4 @@ int	ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	return (count);
-}
-
-
-int	ft_print_format(char spec, va_list args)
-{
-	if (spec == 'c')
-		return (ft_printf_char(va_arg(args, int)));
-	else if (spec == 's')
-		return (ft_print_str(va_arg(args, char *)));
-	else if (spec == 'p')
-		return (ft_print_ptr(va_arg(args, void *)));
-	else if (spec == 'd' || spec == 'i')
-		return (ft_print_int(va_arg(args, int)));
-	else if (spec == 'u')
-		return (ft_printf_int_unsigned(va_arg(args, unsigned int)));
-	else if (spec == 'x')
-		return (ft_print_hex(va_arg(args, unsigned int), 0));
-	else if (spec == 'X')
-		return (ft_print_hex(va_arg(args, unsigned int), 1));
-	else if (spec == '%')
-	{
-		write(1, "%", 1);
-		return (1);
-	}
-	return (0);
 }

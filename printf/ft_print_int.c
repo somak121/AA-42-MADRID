@@ -1,6 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_print_int.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/02 15:26:27 by smikhail          #+#    #+#             */
+/*   Updated: 2025/11/02 16:10:19 by smikhail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-
-#include "printf.h"
+#include "ft_printf.h"
 
 int	ft_print_int(int n)
 {
@@ -21,7 +31,7 @@ int	ft_print_int(int n)
 	}
 	while (nb > 9)
 	{
-		nb = nb/10;
+		nb = nb / 10;
 		i++;
 	}
 	i++;
@@ -38,7 +48,7 @@ int	ft_printf_int_unsigned(unsigned int n)
 	i = 0;
 	while (nb_uns > 9)
 	{
-		nb_uns = nb_uns/10;
+		nb_uns = nb_uns / 10;
 		i++;
 	}
 	i++;
@@ -62,6 +72,7 @@ void	ft_putnbr_print(long n)
 	c = nb % 10 + '0';
 	write(1, &c, 1);
 }
+
 void	ft_putnbr_print_unsigned(unsigned int n)
 {
 	unsigned int	nb;
