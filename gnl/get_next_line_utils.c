@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/16 16:39:36 by smikhail          #+#    #+#             */
+/*   Updated: 2025/11/16 18:38:07 by smikhail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-# include <get_next_line.h>
+#include <get_next_line.h>
 
 int	gnl_strlen(const char *s)
 {
@@ -8,10 +19,11 @@ int	gnl_strlen(const char *s)
 	if (!s)
 		return (0);
 	i = 0;
-	while (s[i]);
+	while (s[i])
 		i++;
 	return (i);
 }
+
 // s1 = part, s2 = buffer
 char	*gnl_strjoin(char *s1, char *s2)
 {
@@ -21,10 +33,11 @@ char	*gnl_strjoin(char *s1, char *s2)
 
 	if (!s1 || !s2)
 		return (NULL);
-	joined = (char *)malloc((gnl_strlen(s1) + gnl_strlen(s2) + 1) * sizeof(char *));
+	joined = (char *)malloc(
+			(gnl_strlen(s1) + gnl_strlen(s2) + 1) * sizeof(char *));
 	if (!joined)
 	{
-		free(s1); //free part
+		free(s1);
 		return (NULL);
 	}
 	i = 0;
@@ -61,6 +74,7 @@ char	*gnl_strdup(const char *s)
 	dup[i] = '\0';
 	return (dup);
 }
+
 // vamos a devolver la posicion en la que se encuentra \n en part
 int	*gnl_find_newline(char *s)
 {
@@ -77,10 +91,11 @@ int	*gnl_find_newline(char *s)
 	}
 	return (-1);
 }
-/* devolvemos una substring de part, desde el incicio hasta la posicion que hemos 
-devuelto en gnl_find_newline
-esta nueva substring nos servira para line
-*/ 
+
+/* devolvemos una substring de part, desde el incicio hasta la posicion 
+que hemos devuelto en gnl_find_newline
+esta nueva substring nos servira para line */
+
 int	gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
@@ -96,7 +111,7 @@ int	gnl_substr(char const *s, unsigned int start, size_t len)
 		sub[i] = s[start + i];
 		i++;
 	}
-	sub[i] = '\0'
+	sub[i] = '\0';
 	return (sub);
 }
 
