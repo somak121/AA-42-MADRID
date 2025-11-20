@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/20 12:23:46 by smikhail          #+#    #+#             */
+/*   Updated: 2025/11/20 16:38:14 by smikhail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
 	static char	*parts[1024];
 	char		*buffer;
@@ -14,7 +25,11 @@ char	*get_next_line(int fd)
 		return (NULL);
 	parts[fd] = part_buffer_add(fd, parts[fd], buffer);
 	if (!parts[fd] || parts[fd][0] == '\0')
+	{
+		free(buffer);
 		return (NULL);
+	}
+	free(buffer);
 	line = check_new_line(&parts[fd]);
 	return (line);
 }
@@ -23,20 +38,21 @@ char	*part_buffer_add(int fd, char *part, char *buffer)
 {
 	int	bytes_read;
 
+	if (!part)
+		part = gnl_strdup("");
 	bytes_read = 1;
 	while (gnl_find_newline(part) == -1 && bytes_read > 0)
 	{
 		bytes_read = read(fd, buffer, BUFFER_SIZE);
 		if (bytes_read < 0)
-			return (free(buffer), free(part), NULL);
+			return (free(part), NULL);
 		if (bytes_read == 0)
 			break ;
 		buffer[bytes_read] = '\0';
 		part = gnl_strjoin(part, buffer);
 		if (!part)
-			return (free(buffer), NULL);
+			return (NULL);
 	}
-	free(buffer);
 	return (part);
 }
 
@@ -47,8 +63,12 @@ char	*check_new_line(char **part)
 	char	*rest;
 	char	*line;
 
-	if (!part || !*part)
+	if (!part || !*part || (*part)[0] == '\0')
+	{
+		free(*part);
+		*part = NULL;
 		return (NULL);
+	}
 	pos = gnl_find_newline(*part);
 	if (pos >= 0)
 	{

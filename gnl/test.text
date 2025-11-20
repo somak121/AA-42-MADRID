@@ -1,0 +1,38 @@
+¿Qué es Valgrind?
+Imagina que eres un detective investigando un crimen en la ciudad "Memoria". 
+Valgrind es tu lupa súper avanzada y tu equipo forense. No ejecuta tu programa 
+de la forma normal; en su lugar, lo ejecuta dentro de un entorno virtual muy 
+controlado, vigilando cada una de las instrucciones que tu programa realiza.
+
+En resumen, Valgrind es una herramienta de depuración y análisis dinámico. Su princ
+ipal utilidad, y la que usarás el 99% del tiempo, es un módulo llamado Memcheck.
+
+Memcheck se especializa en detect
+ar errores de m
+emoria. Es co
+mo un vigilante que supervisa t
+odo lo que tu programa hace con la memoria y te
+grita cuando haces algo mal. 
+Específicamente, te ayuda a encontrar:
+
+Fugas de Memoria (Memory Leaks): Te dice si has reservado memoria con malloc 
+y nunca la has liberado con free. Al final de la ejecución, 
+te da un resumen exacto de cuántos bytes se han perdido y dónde se reservaron.
+Accesos a Memoria Inválida:
+Leer o escribir en bloques de memoria después de haberlos liberado (free).
+Leer o escribir más allá de los límites de un bloque de memoria (por ejemplo,
+ escribir en array[10] cuando el array solo tiene 10 elementos, del 0 al 9).
+Uso de Variables No Inicializadas: Si declaras una variable (ej. int x;) y luego
+intentas usar su valor sin habérselo dado,
+Valgrind te avisará, ya que contiene "basura".
+
+Err
+o
+r
+es
+ en la Gestión de Memoria: Como el Invalid free
+  (liberación doble o liberar algo que no f
+ue reservado con malloc) que ya viste en tus logs.
+Los errores que te mostraba el gnlTester (Invalid free(), 
+Invalid read of size 1) son el resultado directo de lo que Valgrind encontró.
+

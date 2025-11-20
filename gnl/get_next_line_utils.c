@@ -6,14 +6,14 @@
 /*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/16 16:39:36 by smikhail          #+#    #+#             */
-/*   Updated: 2025/11/16 18:38:07 by smikhail         ###   ########.fr       */
+/*   Updated: 2025/11/20 14:22:59 by smikhail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 //fucion auxiliar para reservar memoria
-int	gnl_strlen(const char *s)
+size_t	gnl_strlen(const char *s)
 {
 	int	i;
 
@@ -100,7 +100,7 @@ esta nueva substring nos servira para line */
 char	*gnl_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*sub;
-	int		i;
+	size_t	i;
 
 	if (!s)
 		return (NULL);
@@ -116,7 +116,3 @@ char	*gnl_substr(char const *s, unsigned int start, size_t len)
 	sub[i] = '\0';
 	return (sub);
 }
-
-
-
-

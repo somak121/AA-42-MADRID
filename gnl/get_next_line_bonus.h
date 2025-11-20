@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: smikhail  <smikhail@student.42madrid.co    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/20 12:24:17 by smikhail          #+#    #+#             */
+/*   Updated: 2025/11/20 16:38:24 by smikhail         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
 
@@ -9,10 +21,14 @@
 #  define BUFFER_SIZE 42
 # endif
 
-char	*get_next_line(int fd);
+# ifndef FD_MAX
+#  define FD_MAX 1024
+# endif
+
+char	*get_next_line_bonus(int fd);
 
 // utils
-int		gnl_strlen(const char *s);
+size_t	gnl_strlen(const char *s);
 char	*gnl_strjoin(char *s1, char *s2);
 char	*gnl_strdup(const char *s);
 int		gnl_find_newline(char *s);
